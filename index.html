@@ -1,1 +1,36 @@
-
+<!--
+    Simple static Telegram WebApp. Does not verify the WebAppInitData, as a bot token would be needed for that.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CATGIRL¢ Telegram Verification</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400&display=swap" rel="stylesheet">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js?render=6LfOF0goAAAAALgywvulcalGHi1XTSL6jAXq209p"></script>
+</head>
+<script type="text/javascript">
+    Telegram.WebApp.ready();
+    Telegram.WebApp.MainButton.setText('Verify Me').show().onClick(function () {
+        grecaptcha.ready(function() {
+          grecaptcha.execute('6LfOF0goAAAAALgywvulcalGHi1XTSL6jAXq209p', {action: 'submit'}).then(function(token) {
+        const data = JSON.stringify({token});
+        Telegram.WebApp.sendData(data);
+        Telegram.WebApp.close();
+          });
+        });
+    });
+</script>
+<body style="font-family: 'Roboto', sans-serif; background-color: #fff5f8">
+    <h2><b>Click the button below</b></h2>
+</body>
+<script type="text/javascript">
+    Telegram.WebApp.expand();
+   function onSubmit(token) {
+     document.getElementById("demo-form").submit();
+   }
+</script>
+</html>
